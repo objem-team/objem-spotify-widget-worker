@@ -1,10 +1,23 @@
-name = "objem-spotify-widget-worker"
+name = "spotify_link_extension_worker"
 type = "javascript"
 workers_dev = true
-compatibility_date = "2022-01-26"
+compatibility_date = "2021-12-03"
+kv_namespaces = [
+  { binding = "SESSION_KV", preview_id = "01ecaebc449e406ca7c5fb1e45b6dc63", id = "e4c4f74e619748bea00638eba90341e8" }
+]
 
-[vars]
-WORKERS_RS_VERSION = "0.0.7"
+vars = {
+    SESSION_TTL = 2592000, # 30 days
+    REDIRECT_URI = "https://spotify_link_extension_worker.shiguma.workers.dev/callback",
+    SCOPES = "user-read-currently-playing,user-read-playback-state",
+}
+
+[env.dev]
+vars = {
+    SESSION_TTL = 2592000, # 30 days
+    REDIRECT_URI = "http://localhost:8787/callback",
+    SCOPES = "user-read-currently-playing,user-read-playback-state",
+}
 
 [build]
 command = "cargo install -q worker-build && worker-build --release" # required
