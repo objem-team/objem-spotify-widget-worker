@@ -7,6 +7,12 @@ use worker::{Request, Response, Result, RouteContext};
 
 use crate::utils;
 
+
+pub trait IntoErrorResponse{
+    fn into_error_response<T>(&self)-> Response;
+}
+
+
 pub async fn handler(req: Request, ctx: RouteContext<()>) -> Result<Response> {
     //getパラメーターからcodeを取得
     let query_pairs: HashMap<_, _> = req.url()?.query_pairs().into_owned().collect();

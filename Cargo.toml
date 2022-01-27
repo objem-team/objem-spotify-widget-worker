@@ -1,7 +1,6 @@
 [package]
-name = "spotify_link_extension_worker"
+name = "tfle-worker"
 version = "0.1.0"
-authors = ["shiguma127 <shiguma127@gmail.com>"]
 edition = "2018"
 
 [lib]
@@ -20,6 +19,7 @@ rspotify = {git = "https://github.com/shiguma127/rspotify.git", branch = "tomo/r
 wasm-bindgen = "=0.2.78"
 wasm-bindgen-futures = "0.4"
 js-sys = "0.3"
+futures = "0.3.19"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
