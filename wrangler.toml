@@ -1,16 +1,21 @@
 name = "objem-spotify-widget-worker"
 type = "javascript"
+account_id = ""
 workers_dev = true
-compatibility_date = "2021-12-03"
-kv_namespaces = [
-  { binding = "SESSION_KV", preview_id = "01ecaebc449e406ca7c5fb1e45b6dc63", id = "1afaf20388f84dbe883f7370ba527f87" }
-]
+route = ""
+zone_id = ""
+compatibility_date = "2022-01-27"
 
+kv_namespaces = [
+  { binding = "SESSION_KV",id = "1afaf20388f84dbe883f7370ba527f87",preview_id = "2bf2db78d43441739d1367df8b2b737c"}
+]
 vars = {SESSION_TTL = 2592000,REDIRECT_URI = "https://spotify_link_extension_worker.shiguma.workers.dev/callback",SCOPES = "user-read-currently-playing,user-read-playback-state,user-modify-playback-state"}
 
 [env.dev]
+kv_namespaces = [
+  { binding = "SESSION_KV",preview_id = "2bf2db78d43441739d1367df8b2b737c"}
+]
 vars = {SESSION_TTL = 2592000,REDIRECT_URI = "http://localhost:8787/callback",SCOPES = "user-read-currently-playing,user-read-playback-state,user-modify-playback-state"}
-
 [build]
 command = "cargo install -q worker-build && worker-build --release" # required
 
