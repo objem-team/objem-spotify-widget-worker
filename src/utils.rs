@@ -1,9 +1,9 @@
 use std::collections::{HashMap, HashSet};
 
 use cfg_if::cfg_if;
-use http::StatusCode;
+use http::{StatusCode, header};
 use rspotify::{AuthCodeSpotify, Credentials, OAuth, Token};
-use worker::{RouteContext, Response,Request};
+use worker::{RouteContext, Response,Request, Headers, Error};
 
 cfg_if! {
     // https://github.com/rustwasm/console_error_panic_hook#readme
@@ -107,4 +107,11 @@ pub async fn get_auth_code_spotify(req:&Request,ctx:&RouteContext<()>)->std::res
     spotify.creds = get_spotify_credentials(&ctx).unwrap();
     spotify.config.token_refreshing = true;
     Ok(spotify)
+}
+
+pub fn append_cors_header(headers: &mut Headers)->std::result::Result<(),Error>{
+     headers.append("Access-Control-Allow-Origin", "https://objem.app")?;
+     headers.append("access-control-allow-credentials","true")?;
+     headers.append("access-control-allow-methods","GET")?;
+    Ok(())
 }
