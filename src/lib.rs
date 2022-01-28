@@ -21,6 +21,9 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
         .get("/login", routes::login::handler)
         .get_async("/callback", routes::callback::handler)
         .get_async("/next", routes::next::handler)
+        .get_async("/previous", routes::previous::handler)
+        .get_async("/pause", routes::pause::handler)
+        .get_async("/resume", routes::resume_playback::handler)
         .run(req, env)
         .await
 }
