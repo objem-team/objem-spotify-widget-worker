@@ -5,3 +5,5 @@ pub mod next;
 pub mod pause;
 pub mod previous;
 pub mod resume_playback;
+pub mod preflight;
+pub mod test;

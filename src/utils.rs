@@ -149,8 +149,9 @@ pub async fn get_auth_code_spotify(
 }
 
 pub fn append_cors_header(headers: &mut Headers) -> std::result::Result<(), Error> {
-    headers.append("Access-Control-Allow-Origin", "https://objem.app")?;
+    headers.append("Access-Control-Allow-Headers", "objem")?;
+    headers.append("Access-Control-Allow-Origin", "http://localhost:3000")?;
     headers.append("access-control-allow-credentials", "true")?;
-    headers.append("access-control-allow-methods", "GET")?;
+    headers.append("access-control-allow-methods", "GET,PUT")?;
     Ok(())
 }

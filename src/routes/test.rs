@@ -1,7 +1,7 @@
 use http::StatusCode;
 use rspotify::{
     clients::OAuthClient,
-    model::{AdditionalType, PlayableItem},
+    model::{AdditionalType},
 };
 use worker::{Request, Response, Result, RouteContext};
 
@@ -28,18 +28,8 @@ pub async fn handler(req: Request, ctx: RouteContext<()>) -> Result<Response> {
         }
     };
 
-    let playing_context = match result {
-        Some(result) => result,
-        None => return Response::error("No Playing context", StatusCode::BAD_REQUEST.as_u16()),
-    };
-
-    let item = match playing_context.item {
-        Some(item) => item,
-        None => return Response::error("No Playing context", StatusCode::BAD_REQUEST.as_u16()),
-    };
-
-    match item {
-        PlayableItem::Track(track) => Response::from_json(&track),
-        PlayableItem::Episode(episode) => Response::from_json(&episode),
+    match result {
+        Some(result) => Response::from_json(&result),
+        None => Response::error("No Playing context", StatusCode::BAD_REQUEST.as_u16()),
     }
 }

@@ -1,3 +1,4 @@
+use http::{response, StatusCode};
 use worker::*;
 mod routes;
 mod utils;
@@ -16,14 +17,26 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
     log_request(&req);
     utils::set_panic_hook();
     let router = Router::new();
-    router
+    let response = router
+        .options( "/*route", routes::preflight::handler)
         .get_async("/", routes::index::handler)
         .get("/login", routes::login::handler)
         .get_async("/callback", routes::callback::handler)
-        .get_async("/next", routes::next::handler)
-        .get_async("/previous", routes::previous::handler)
-        .get_async("/pause", routes::pause::handler)
-        .get_async("/resume", routes::resume_playback::handler)
+        .put_async("/next", routes::next::handler)
+        .put_async("/previous", routes::previous::handler)
+        .put_async("/pause", routes::pause::handler)
+        .put_async("/resume", routes::resume_playback::handler)
+        .get_async("/test",routes::test::handler)
         .run(req, env)
-        .await
+        .await;
+    let mut response = match response {
+        Ok(response) => response,
+        Err(err) => return Err(err),
+    };
+    if response.status_code() == StatusCode::FOUND.as_u16() {
+        return Ok(response);
+    }
+    let headers = response.headers_mut();
+    utils::append_cors_header(headers)?;
+    Ok(response)
 }

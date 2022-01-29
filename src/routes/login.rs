@@ -15,5 +15,5 @@ pub fn handler(_req: Request, ctx: RouteContext<()>) -> Result<Response> {
         }
     };
     let url = Url::parse(&spotify.get_authorize_url(false).unwrap_throw())?;
-    Response::redirect_with_status(url, 301)
+    Response::redirect_with_status(url, StatusCode::FOUND.as_u16())
 }
