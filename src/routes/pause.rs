@@ -1,4 +1,3 @@
-use futures::task::Spawn;
 use http::StatusCode;
 use rspotify::{clients::OAuthClient, ClientError};
 use worker::{Request, Response, Result, RouteContext};

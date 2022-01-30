@@ -1,4 +1,4 @@
-use http::{response, StatusCode};
+use http::{StatusCode};
 use worker::*;
 mod routes;
 mod utils;
@@ -26,7 +26,8 @@ pub async fn main(req: Request, env: Env) -> Result<Response> {
         .put_async("/previous", routes::previous::handler)
         .put_async("/pause", routes::pause::handler)
         .put_async("/resume", routes::resume_playback::handler)
-        .get_async("/test",routes::test::handler)
+        .put_async("/shuffle", routes::shuffle::handler)
+        .put_async("/repeat",routes::repeat::handler)
         .run(req, env)
         .await;
     let mut response = match response {
