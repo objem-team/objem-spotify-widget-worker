@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
 use cfg_if::cfg_if;
-use http::{StatusCode};
+use http::StatusCode;
 use rspotify::{AuthCodeSpotify, Credentials, OAuth, Token};
 use worker::{Error, Headers, Request, Response, RouteContext};
 
