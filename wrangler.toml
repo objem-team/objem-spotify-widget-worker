@@ -9,7 +9,7 @@ compatibility_date = "2022-01-27"
 kv_namespaces = [
   { binding = "SESSION_KV",id = "1afaf20388f84dbe883f7370ba527f87",preview_id = "2bf2db78d43441739d1367df8b2b737c"}
 ]
-vars = {SESSION_TTL = 2592000,REDIRECT_URI = "https://spotify_link_extension_worker.shiguma.workers.dev/callback",SCOPES = "user-read-currently-playing,user-read-playback-state,user-modify-playback-state"}
+vars = {SESSION_TTL = 2592000,REDIRECT_URI = "https://objem.app/spotify-callback",SCOPES = "user-read-currently-playing,user-read-playback-state,user-modify-playback-state"}
 
 [env.dev]
 kv_namespaces = [

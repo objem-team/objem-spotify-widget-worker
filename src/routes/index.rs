@@ -27,7 +27,7 @@ pub async fn handler(req: Request, ctx: RouteContext<()>) -> Result<Response> {
             )
         }
     };
-
+    
     match result {
         Some(result) => Response::from_json(&result),
         None => return Response::error("No Playing context", StatusCode::BAD_REQUEST.as_u16()),
